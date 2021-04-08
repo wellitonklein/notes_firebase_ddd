@@ -1,0 +1,13 @@
+part of 'note_watcher_bloc.dart';
+
+@freezed
+class NoteWatcherState with _$NoteWatcherState {
+  const factory NoteWatcherState.initial() = _Initial;
+  const factory NoteWatcherState.loadInProgress() = _LoadInProgress;
+  const factory NoteWatcherState.loadSuccess({
+    required KtList<NoteEntity> notes,
+  }) = _LoadSuccess;
+  const factory NoteWatcherState.loadFailure({
+    required NoteFailure noteFailure,
+  }) = _LoadFailure;
+}
