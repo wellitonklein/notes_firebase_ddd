@@ -6,6 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../application/application.dart';
 import '../../../injection.dart';
 import '../../routes/router.gr.dart';
+import 'widgets/widgets.dart';
 
 class NotesOverviewPage extends StatelessWidget {
   @override
@@ -66,6 +67,7 @@ class NotesOverviewPage extends StatelessWidget {
               ),
             ],
           ),
+          body: NotesOverviewBodyWidget(),
           floatingActionButton: FloatingActionButton(
             onPressed: () {
               // TODO: Navigate to NoteFormPage
