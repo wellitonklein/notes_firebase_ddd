@@ -5,3 +5,4 @@ analizer:
     missing_required_param: error
     missing_return: error
     must_be_immutable: error
+    Sort_pub_dependencies: none

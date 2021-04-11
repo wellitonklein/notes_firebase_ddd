@@ -6,8 +6,6 @@ import 'package:kt_dart/kt.dart';
 
 import '../../domain/domain.dart';
 
-part 'note_dtos.g.dart';
-
 @JsonSerializable()
 class NoteDTO {
   @JsonKey(ignore: true)
@@ -37,7 +35,7 @@ class NoteDTO {
 
   NoteEntity toDomain() {
     return NoteEntity(
-      id: id != null ? UniqueId.fromUniqueString(id!) : UniqueId(),
+      id: UniqueId.fromUniqueString(id!),
       body: NoteBody(input: body),
       color: NoteColor(input: Color(color)),
       todos: List3(input: todos.map((dto) => dto.toDomain()).toImmutableList()),
@@ -45,7 +43,16 @@ class NoteDTO {
   }
 
   factory NoteDTO.fromJson(Map<String, dynamic> json) {
-    return _$NoteDTOFromJson(json);
+    final _note = NoteDTO(
+      id: json['id'] as String,
+      body: json['body'] as String,
+      color: json['color'] as int,
+      todos: (json['todos'] as List)
+          .map((e) => TodoItemDTO.fromJson(e as Map<String, dynamic>))
+          .toList(),
+    );
+
+    return _note;
   }
 
   factory NoteDTO.fromFirestore(DocumentSnapshot doc) {
@@ -55,7 +62,11 @@ class NoteDTO {
   }
 
   Map<String, dynamic> toJson() {
-    return _$NoteDTOToJson(this);
+    return {
+      'body': body,
+      'color': color,
+      'todos': todos.map((todoItem) => todoItem.toJson()).toList()
+    };
   }
 }
 
@@ -88,10 +99,18 @@ class TodoItemDTO {
   }
 
   factory TodoItemDTO.fromJson(Map<String, dynamic> json) {
-    return _$TodoItemDTOFromJson(json);
+    return TodoItemDTO(
+      id: json['id'] as String,
+      name: json['name'] as String,
+      done: json['done'] as bool,
+    );
   }
 
   Map<String, dynamic> toJson() {
-    return _$TodoItemDTOToJson(this);
+    return {
+      'id': id,
+      'name': name,
+      'done': done,
+    };
   }
 }

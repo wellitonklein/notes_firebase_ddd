@@ -5,10 +5,9 @@ import 'package:injectable/injectable.dart';
 import 'injection.dart';
 import 'presentation/presentation.dart';
 
-void main() {
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  Firebase.initializeApp().then((_) {
-    configureInjection(Environment.prod);
-    runApp(AppWidget());
-  });
+  configureInjection(Environment.prod);
+  await Firebase.initializeApp();
+  runApp(AppWidget());
 }

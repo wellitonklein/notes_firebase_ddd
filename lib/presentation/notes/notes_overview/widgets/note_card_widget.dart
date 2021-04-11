@@ -1,9 +1,11 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kt_dart/kt.dart';
 
 import '../../../../application/application.dart';
 import '../../../../domain/domain.dart';
+import '../../../routes/router.gr.dart';
 
 class NoteCardWidget extends StatelessWidget {
   final NoteEntity note;
@@ -16,7 +18,7 @@ class NoteCardWidget extends StatelessWidget {
       margin: const EdgeInsets.symmetric(vertical: 5.0, horizontal: 8.0),
       child: InkWell(
         onTap: () {
-          // TODO: Implement navigation
+          AutoRouter.of(context).push(NoteFormPageRoute(editedNote: note));
         },
         onLongPress: () {
           final noteActorBloc = context.read<NoteActorBloc>();

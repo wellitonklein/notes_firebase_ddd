@@ -1,5 +1,5 @@
 import 'package:dartz/dartz.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_auth/firebase_auth.dart' hide User;
 import 'package:flutter/services.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:injectable/injectable.dart';
@@ -20,8 +20,7 @@ class FirebaseAuthFacade implements IAuthFacade {
 
   @override
   Future<Option<UserEntity>> getSignedInUser() async {
-    final currentUser = _firebaseAuth.currentUser;
-    return optionOf(currentUser?.toDomain());
+    return optionOf(_firebaseAuth.currentUser?.toDomain());
   }
 
   @override
@@ -37,7 +36,7 @@ class FirebaseAuthFacade implements IAuthFacade {
         password: passwordStr,
       );
       return right(unit);
-    } on PlatformException catch (error) {
+    } on FirebaseAuthException catch (error) {
       if (error.code == 'email-already-in-use') {
         return left(const AuthFailure.emailAlreadyInUse());
       } else {
@@ -59,7 +58,7 @@ class FirebaseAuthFacade implements IAuthFacade {
         password: passwordStr,
       );
       return right(unit);
-    } on PlatformException catch (error) {
+    } on FirebaseAuthException catch (error) {
       if (error.code == 'wrong-password' || error.code == 'user-not-found') {
         return left(const AuthFailure.invalidEmailAndPasswordCombination());
       } else {

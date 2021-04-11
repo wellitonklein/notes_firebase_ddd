@@ -10,6 +10,7 @@ import '../splash/splash.dart';
     MaterialRoute(page: SplashPage, initial: true),
     MaterialRoute(page: SignInPage),
     MaterialRoute(page: NotesOverviewPage),
+    MaterialRoute(page: NoteFormPage, fullscreenDialog: true),
   ],
 )
 class $AppRouter {}

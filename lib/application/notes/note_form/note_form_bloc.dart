@@ -21,6 +21,8 @@ class NoteFormBloc extends Bloc<NoteFormEvent, NoteFormState> {
       : _noteRepository = noteRepository,
         super(NoteFormState.initial());
 
+  Either<NoteFailure, Unit>? failureOrSuccess;
+
   @override
   Stream<NoteFormState> mapEventToState(
     NoteFormEvent event,
@@ -55,9 +57,6 @@ class NoteFormBloc extends Bloc<NoteFormEvent, NoteFormState> {
         );
       },
       saved: (e) async* {
-        Either<NoteFailure, Unit> failureOrSuccess =
-            left(const NoteFailure.unexpected());
-
         yield state.copyWith(
           isSaving: true,
           saveFailureOrSuccessOption: none(),
@@ -68,7 +67,8 @@ class NoteFormBloc extends Bloc<NoteFormEvent, NoteFormState> {
               : await _noteRepository.create(state.note);
         }
         yield state.copyWith(
-          isSaving: true,
+          isSaving: false,
+          showErrorMessages: true,
           saveFailureOrSuccessOption: optionOf(failureOrSuccess),
         );
       },

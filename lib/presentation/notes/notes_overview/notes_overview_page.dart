@@ -70,7 +70,7 @@ class NotesOverviewPage extends StatelessWidget {
           body: NotesOverviewBodyWidget(),
           floatingActionButton: FloatingActionButton(
             onPressed: () {
-              // TODO: Navigate to NoteFormPage
+              AutoRouter.of(context).push(NoteFormPageRoute(editedNote: null));
             },
             tooltip: 'New Note',
             child: const Icon(Icons.add),
