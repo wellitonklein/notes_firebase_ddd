@@ -1,16 +1,9 @@
-# notes_firebase_ddd
+# Domain-Driven Design + Firebase Flutter Course
 
-A new Flutter project.
+<br />
 
-## Getting Started
+<h3 align="center">DDD Architecture Proposal</h3>
 
-This project is a starting point for a Flutter application.
+<br />
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+<img src="https://raw.githubusercontent.com/ResoCoder/flutter-ddd-firebase-course/master/ddd-architecture-proposal.svg" style="display: block; margin-left: auto; margin-right: auto; width: 75%;"/>
